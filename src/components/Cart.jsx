@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ShopContext } from '../context'
 
-const Cart = (props) => {
-  const {quantity = 0, handleCartShow = Function.prototype} = props;
+const Cart = () => {
+  const { order, handleCartShow = Function.prototype} = useContext(ShopContext);
+
+  let quantity = order.reduce((sum, el) => {
+    return sum + el.quantity
+  }, 0)
   return (
     <div className='cart blue darken-4 white-text' onClick={handleCartShow}>
       <i className='material-icons'>shopping_cart</i>
